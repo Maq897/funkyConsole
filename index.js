@@ -38,8 +38,7 @@ const funkyConsole = {
         console.log(now.getDate())
       }
     },
-    loading:
-    (param)=>{
+    loading: (param)=>{
         if (param !== '') {
           let count = 0
           const interval = setInterval(()=>{
@@ -66,7 +65,6 @@ const funkyConsole = {
       if (pa === 'kao' || pa =='kao' && !command ) {
         let count = 1
         const fullOCrap = [
-          ' _|_ ',
           "(＾▽＾)", "☆*: .｡. o(≧▽≦)o .｡.:*☆", "╰(*°▽°*)╯", "(❁´◡`❁)", "(～￣▽￣)～",
           "(┬┬﹏┬┬)", "(╥﹏╥)", "(ಥ﹏ಥ)", "(｡•́︿•̀｡)", "(ಥ_ಥ)",
           "(¬_¬\")", "(ಠ_ಠ)", "(ノಠ益ಠ)ノ彡┻━┻", "(╬ಠ益ಠ)", "(╯°□°）╯︵ ┻━┻",
