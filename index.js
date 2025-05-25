@@ -9,18 +9,15 @@ const funkyConsole = {
           console.log(`  ${c}`)
         }
       }
-    },
-    clear: (param,what)=>{
+    }, clear: (param,what)=>{
       console.clear()
       console.log(param)
       if (what === 'everything'){
         document.body.innerHTML = param
       }
-    },
-    err: (daWarning)=>{
+    },err: (daWarning)=>{
       console.log(`%c${daWarning}`, "color: red; font-size: 50px; border: 1px solid red;")
-    },
-    logNow: (type)=>{
+    },logNow: (type)=>{
       const now = new Date()
       const param = type.trim().toLowerCase()
       if (param === 'hours' || 'hour') {
@@ -37,8 +34,7 @@ const funkyConsole = {
       if (param === 'second') {
         console.log(now.getDate())
       }
-    },
-    loading: (param)=>{
+    },loading: (param)=>{
         if (param !== '') {
           let count = 0
           const interval = setInterval(()=>{
