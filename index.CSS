@@ -1,0 +1,20 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap');
+  .imperial-script-regular {
+    font-family: "Imperial Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  div {
+    font-family: 'Courier New', Courier, monospace;
+    width: fit-content;
+    height:60px;
+    padding: 7px;;
+    display: inline-block;
+    border: 1px solid black;
+  }
