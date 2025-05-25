@@ -80,7 +80,7 @@ const funkyConsole = {
           const kaomoji = `${count}) ${kao}`;
           con.innerHTML = kaomoji;
           if(command === 'cp') {
-            imperial.appendChild(con)
+            imperial.innerHTML += con
           };
           if(command === 'log' &&  !funky) {
             console.log(kaomoji)
