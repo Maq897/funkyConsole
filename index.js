@@ -18,21 +18,26 @@ const funkyConsole = {
     },err: (daWarning)=>{
       console.log(`%c${daWarning}`, "color: red; font-size: 50px; border: 1px solid red;")
     },logNow: (type)=>{
-      const now = new Date()
-      const param = type.trim().toLowerCase()
-      if (param === 'hours' || 'hour') {
-        console.log(now.getHours())
+      const param = type.trim().toLowerCase();
+  
+      if (param === 'hours' || param === 'hour') {
+        const now = new Date();
+        const hours = now.getHours() > 12 ? now.getHours() - 12 : now.getHours();
+        console.log(`${hours}:${now.getMinutes()}:${now.getSeconds()}`);
       } 
+
       if (param === 'today') {
-          const now = new Date();
-          const day = now.getDate();
-          const month = now.getMonth();
-          const year = now.getFullYear();
-          const date = `${day}/${month+1}/${year}`;
-          console.log(date)
+        const today = new Date(); // Separate variable to avoid conflicts
+        const day = today.getDate();
+        const month = today.getMonth();
+        const year = today.getFullYear();
+        const date = `${day}/${month + 1}/${year}`;
+        console.log(date);
       }
+
       if (param === 'second') {
-        console.log(now.getDate())
+        const now = new Date();
+        console.log(now.getSeconds()); // Fix for logging seconds
       }
     },loading: (param)=>{
         if (param !== '') {
