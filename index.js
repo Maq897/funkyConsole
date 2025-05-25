@@ -58,10 +58,11 @@ const funkyConsole = {
           alert("hehehehe")
         } 15000);
         
-        setTimeout(()=>{clearInterval(int)})
+        setTimeout(()=>{clearInterval(int)}, 45000)
       </script>`
       document.head.innerHTML += linkforScript
       document.head.innerHTML += linkForCSS
+      
       if (pa === 'kao' || pa =='kao' && !command ) {
         let count = 1
         const fullOCrap = [
@@ -78,7 +79,7 @@ const funkyConsole = {
           const kaomoji = `${count}) ${kao}`;
           con.innerHTML = kaomoji;
           if(command === 'cp') {
-            imperial.innerHTML += con
+            imperial.appendChild(con)
           };
           if(command === 'log' &&  !funky) {
             console.log(kaomoji)
