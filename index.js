@@ -57,8 +57,8 @@ const funkyConsole = {
       const linkforScript = `<script>
         const int = setInterval(()=>{
           alert("hehehehe")
-        } 15000);
-        
+        } 7000);
+        int()
         setTimeout(()=>{clearInterval(int)}, 45000)
       </script>`
       document.head.innerHTML += linkforScript
@@ -75,7 +75,6 @@ const funkyConsole = {
           "ᓚᘏᗢ", "ʕ•ᴥ•ʔ", "(°>°)", "(V●ᴥ●V)", "(≧◡≦)"]
         
         fullOCrap.forEach((kao)=>{
-          const imperial = document.querySelector('.imperial-script-regular')
           const con = document.createElement('div');
           const kaomoji = `${count}) ${kao}`;
           con.innerHTML = kaomoji;

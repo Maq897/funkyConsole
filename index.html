@@ -9,11 +9,62 @@
 </head>
 <body>
 <p class="imperial-script-regular"></p>
-<div id="instructions">This will be updated in due time... since this is just a test run!</div>
-<button id="ultraSigma">?</button>
+<div id="instructions">
+      
+    <ul list-style-type="disc">
+      <li>
+        funkyConsole.log(text, color1, color2)
+      </li><br>
+      <li style="width: 100%;">funkyConsole.clear(exchangesTheValue, consoleOrEverything)</li><br>
+      <li>funkyConsole.err(warnsinconsole)</li><br>
+      <li>funkyConsole.logNow(param)<br>param can be econds or hours or today</li><br>
+      <li>funkyConsole.loading(param)<br>It can be any verb it will input it into the console like param+ing</li><br>
+      <li> 
+        <details>
+              <summary>funkyConsole.hehe(...,..,...) {...}</summary>
+              <p style="height: 150px; display: block; overflow-y: auto;" class="scrollable"> hehe : (param, command, funky) => {<br>
+      
+                const pa = param.toLowerCase();<br>
+                document.head.innerHTML += linkforScript<br>
+                document.head.innerHTML += linkForCSS<br>
+                
+                if (pa === 'kao' || pa =='kao' && !command ) {<br>
+                  let count = 1<br>
+                  const fullOCrap = [<br>
+                    "(＾▽＾)", "☆*: .｡. o(≧▽≦)o .｡.:*☆", "╰(*°▽°*)╯", "(❁´◡`❁)", "(～￣▽￣)～",<br>
+                    "(┬┬﹏┬┬)", "(╥﹏╥)", "(ಥ﹏ಥ)", "(｡•́︿•̀｡)", "(ಥ_ಥ)",<br>
+                    "(¬_¬\")", "(ಠ_ಠ)", "(ノಠ益ಠ)ノ彡┻━┻", "(╬ಠ益ಠ)", "(╯°□°）╯︵ ┻━┻",<br>
+                    "(♡˙︶˙♡)", "(｡♥‿♥｡)", "(づ￣ ³￣)づ", "(っ˘ڡ˘ς)", "(✿ ♥‿♥)",<br>
+                    "(⊙_⊙)", "(°ロ°) !", "(＠_＠)", "(◎_◎;)", "(o_O)",<br>
+                    "ᓚᘏᗢ", "ʕ•ᴥ•ʔ", "(°>°)", "(V●ᴥ●V)", "(≧◡≦)"]<br>
+                  
+                  fullOCrap.forEach((kao)=>{<br>
+                    const con = document.createElement('div');<br>
+                    const kaomoji = `${count}) ${kao}`;<br>
+                    con.innerHTML = kaomoji;<br>
+                    if(command === 'cp') {<br>
+                      imperial.appendChild(con)<br>
+                    };<br>
+                    if(command === 'log' &&  !funky) {<br>
+                      console.log(kaomoji)<br>
+                    }<br>
+                    if(command ==='log' && funky && funky.toLowerCase() === 'funky') {<br>
+                      funkyConsole.log(kaomoji)<br>
+                    }<br>
+                    count++<br>
+                  })<br>
+                }<br>
+              }<br>
+      <br><b><i>Try and comprehend this, I aint gonna waste my time summarizing this thing, I already made it. Read it</i></b></p>
+            </details></li>
+    </ul>
+</div>
+<button id="ultraSigma" onclick="
+  const inst = document.getElementById('instructions');
+  inst.style.display = inst.style.display === 'none' ? 'flex' : 'none';
+">?</button>
 <script src="index.js"></script>
 <script>
-
 </script>
 </body>
 </html>
