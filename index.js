@@ -15,9 +15,9 @@ const funkyConsole = {
       if (what === 'everything'){
         document.body.innerHTML = param
       }
-    },err: (daWarning)=>{
+    }, err: (daWarning)=>{
       console.log(`%c${daWarning}`, "color: red; font-size: 50px; border: 1px solid red;")
-    },logNow: (type)=>{
+    }, logNow: (type)=>{
       const param = type.trim().toLowerCase();
   
       if (param === 'hours' || param === 'hour') {
@@ -39,7 +39,7 @@ const funkyConsole = {
         const now = new Date();
         console.log(now.getSeconds()); // Fix for logging seconds
       }
-    },loading: (param)=>{
+    }, loading: (param)=>{
         if (param !== '') {
           let count = 0
           const interval = setInterval(()=>{
@@ -90,5 +90,9 @@ const funkyConsole = {
           count++
         })
       }
+    }, randomInt: (floor, roof) => {
+      let int = Math.floor(Math.random() * (roof - floor + 1)) + floor;
+      console.log(int);
     }
+    
   }
