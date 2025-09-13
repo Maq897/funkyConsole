@@ -126,6 +126,8 @@ const login = () => {
 };
 
 window.onload = () => {
-  localStorage.removeItem('player-name');
-  login();
+  setTimeout(()=> {
+    localStorage.removeItem('player-name');
+    login();
+  }, 3000)
 };
