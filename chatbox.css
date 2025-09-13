@@ -1,0 +1,43 @@
+#chatBoxDiv {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 7px;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  font-family: sans-serif;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  overflow-y: auto;
+}
+
+#InpEl {
+  width: 50%;
+  height: 30px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+#InpEl:focus-visible, #InpEl:hover {
+  border: 1px solid black;
+}
+.chat-message {
+  margin: 5px 0;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.chat-message:hover {
+  border: 1px solid black;
+}
