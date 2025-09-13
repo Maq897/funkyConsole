@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebas
 import { getDatabase, ref, get, push } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
+// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyBscCU3A9p3n2aWBcICWD5u5Tcq4ehc0A8",
   authDomain: "mytimehub-c6c16.firebaseapp.com",
@@ -16,32 +17,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
-console.log('%c-Chatbox script loaded-\n-Chatbox.js', 
-  'color: white; background-color: green; font-weight: bold; font-size: 50px; padding: 7px; border: none; border-radius: 5px')
+
 // UI Setup
 const chatBox = document.createElement('div');
 chatBox.id = 'chatBoxDiv';
+chatBox.style.display = 'none';
 document.body.appendChild(chatBox);
+
 const input = document.createElement('input');
 input.id = 'InpEl';
 input.type = 'text';
 input.placeholder = 'Press ENTER to chat!';
+input.style.display = 'none';
 document.body.appendChild(input);
 
-window.onload = () => {
-  localStorage.removeItem('player-name')
-  chatBox.style.display = 'none' 
-  input.style.display = 'none'
-}
 // Message Renderer
 const renderMessage = (sender, text) => {
   const msgDiv = document.createElement('div');
   msgDiv.className = 'chat-message';
   msgDiv.textContent = `${sender}: ${text}`;
   chatBox.appendChild(msgDiv);
-
-  const br = document.createElement('br');
-  chatBox.appendChild(br);
+  chatBox.scrollTop = chatBox.scrollHeight;
 };
 
 // Load Messages
@@ -53,8 +49,6 @@ const loadMessages = async () => {
       const [sender, text] = msg.split(' | ');
       renderMessage(sender, text);
     });
-  } else {
-    console.log("No messages found");
   }
 };
 
@@ -66,53 +60,72 @@ const sendMessage = async (text) => {
   renderMessage(playerName, text);
 };
 
-// Auth and Init
+// Auth
 signInAnonymously(auth)
   .then(() => console.log("Signed in anonymously"))
   .catch(err => console.error("Auth error:", err));
 
-onAuthStateChanged(auth, user => {
-    console.log(user)
-});
+onAuthStateChanged(auth, user => console.log(user));
 
 // Input Listener
 input.addEventListener('keydown', (e) => {
-  if (localStorage.getItem('player-name') && e.key === 'Enter' && input.value.trim() ) {
+  if (localStorage.getItem('player-name') && e.key === 'Enter' && input.value.trim()) {
     sendMessage(input.value.trim());
     input.value = '';
   }
 });
+
 window.addEventListener('keydown', e => {
-  if (e.key === ('|')) {
-    input.style.display = input.style.display === 'none' ? 'block' : 'none'
+  if (e.key === '|') {
+    input.style.display = input.style.display === 'none' ? 'block' : 'none';
     chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
   }
-})
-const chooseAcc = async (acc_name) => {
-  console.log('ChooseAcc running..')
-  const AllowedUser = await get(ref(db, `AllowedUsers/${acc_name}`))
-  if (AllowedUser.exists()) {
-    const pwd = AllowedUser.val()
-    const enteredPwd = prompt(`Enter the password for ${acc_name}`)
+});
 
-    if (pwd === `pwd=${enteredPwd}` && typeof pwd === 'string') {
+// Modal Prompt Replacement
+const showPasswordPrompt = (acc_name) => {
+  const modal = document.createElement('div');
+  modal.id = 'pwdModal';
+  modal.innerHTML = `
+    <div style="background:#222; color:white; padding:20px; border-radius:10px; position:fixed; top:30%; left:35%; z-index:9999;">
+      <label>Enter password for <b>${acc_name}</b>:</label><br>
+      <input type="password" id="pwdInput" style="margin-top:10px;" /><br>
+      <button id="pwdSubmit" style="margin-top:10px;">Submit</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
 
-      console.log('Correct pwd, continuing setting item to localStorage')
-      alert('Correct Password')
-      localStorage.setItem('player-name', acc_name)
-      loadMessages()
+  document.getElementById('pwdSubmit').onclick = async () => {
+    const enteredPwd = document.getElementById('pwdInput').value;
+    const AllowedUser = await get(ref(db, `AllowedUsers/${acc_name}`));
+    if (AllowedUser.exists()) {
+      const pwd = AllowedUser.val();
+      if (pwd === `pwd=${enteredPwd}`) {
+        alert('Correct Password');
+        localStorage.setItem('player-name', acc_name);
+        chatBox.style.display = 'flex';
+        input.style.display = 'block';
+        loadMessages();
+        modal.remove();
+      } else {
+        alert('Incorrect password');
+        localStorage.removeItem('player-name');
+        modal.remove();
+      }
     } else {
-      alert('Incorrect password, reload to try again.')
-      localStorage.removeItem('player-name')
-      input.style.display = input.style.display === 'none' ? 'block' : 'none'
-      chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
+      alert('Account not found');
+      modal.remove();
     }
-  } else {
-    console.log('Does not exist')
-  }
-}
+  };
+};
+
+// Login Flow
 const login = () => {
-  const accChoosery = prompt('Enter the name of your account: ')
-  chooseAcc(accChoosery)
-}
-login()
+  const accName = prompt('Enter your account name:');
+  if (accName) showPasswordPrompt(accName);
+};
+
+window.onload = () => {
+  localStorage.removeItem('player-name');
+  login();
+};

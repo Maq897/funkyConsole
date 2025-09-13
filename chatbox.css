@@ -40,3 +40,13 @@
 .chat-message:hover {
   border: 1px solid black;
 }
+#pwdPrompt {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  background: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 9999;
+}
