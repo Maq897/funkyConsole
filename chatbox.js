@@ -16,7 +16,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
-
+console.log('%c-Chatbox script loaded-\n-Chatbox.js', 
+  'color: white; background-color: green; font-weight: bold; font-size: 50px; padding: 7px; border: none; border-radius: 5px')
 // UI Setup
 const chatBox = document.createElement('div');
 chatBox.id = 'chatBoxDiv';
