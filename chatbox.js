@@ -77,3 +77,12 @@ input.addEventListener('keydown', (e) => {
     input.value = '';
   }
 });
+
+// Toggle display
+window.addEventListener('keydown', e => {
+  if (e.key === ('Shift' && 'L')) {
+    input.style.display = input.style.display === 'none' ? 'block' : 'none'
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+
+  }
+})
