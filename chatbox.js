@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-import { getDatabase, ref, get, push } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, get } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
 // Firebase Config
@@ -28,6 +28,7 @@ const input = document.createElement('input');
 input.id = 'InpEl';
 input.type = 'text';
 input.placeholder = 'Press ENTER to chat!';
+input.autoFill = 'off'
 input.style.display = 'none';
 document.body.appendChild(input);
 
@@ -40,9 +41,9 @@ const renderMessage = (sender, text) => {
   chatBox.scrollTop = chatBox.scrollHeight;
 };
 
-// Load Messages
-const loadMessages = async () => {
-  const snapshot = await get(ref(db, 'chat/'));
+// Real-time listener (replaces loadMessages + get())
+onValue(ref(db, 'chat/'), snapshot => {
+  chatBox.innerHTML = ''; // Clear old messages
   if (snapshot.exists()) {
     const messages = snapshot.val();
     Object.values(messages).forEach(msg => {
@@ -50,14 +51,13 @@ const loadMessages = async () => {
       renderMessage(sender, text);
     });
   }
-};
+});
 
 // Send Message
 const sendMessage = async (text) => {
   const playerName = localStorage.getItem('player-name') || 'Anonymous';
   const message = `${playerName} | ${text}`;
   await push(ref(db, 'chat/'), message);
-  renderMessage(playerName, text);
 };
 
 // Auth
@@ -105,7 +105,6 @@ const showPasswordPrompt = (acc_name) => {
         localStorage.setItem('player-name', acc_name);
         chatBox.style.display = 'flex';
         input.style.display = 'block';
-        loadMessages();
         modal.remove();
       } else {
         alert('Incorrect password');
@@ -129,5 +128,5 @@ window.onload = () => {
   setTimeout(()=> {
     localStorage.removeItem('player-name');
     login();
-  }, 3000)
+  }, 3000);
 };
