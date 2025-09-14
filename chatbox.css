@@ -36,10 +36,6 @@
   padding: 3px;
   border-radius: 4px;
 }
-
-.chat-message:hover {
-  border: 1px solid black;
-}
 #pwdPrompt {
   position: fixed;
   top: 30%;

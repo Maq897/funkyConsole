@@ -36,7 +36,7 @@ document.body.appendChild(input);
 const renderMessage = (sender, text) => {
   const msgDiv = document.createElement('div');
   msgDiv.className = 'chat-message';
-  msgDiv.textContent = `${sender}: ${text}`;
+  msgDiv.innerHTML = `<b>${sender}</b>: ${text}`;
   chatBox.appendChild(msgDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
 };
@@ -65,8 +65,6 @@ signInAnonymously(auth)
   .then(() => console.log("Signed in anonymously"))
   .catch(err => console.error("Auth error:", err));
 
-onAuthStateChanged(auth, user => console.log(user));
-
 // Input Listener
 input.addEventListener('keydown', (e) => {
   if (localStorage.getItem('player-name') && e.key === 'Enter' && input.value.trim()) {
@@ -75,12 +73,7 @@ input.addEventListener('keydown', (e) => {
   }
 });
 
-window.addEventListener('keydown', e => {
-  if (e.key === '|') {
-    input.style.display = input.style.display === 'none' ? 'block' : 'none';
-    chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
-  }
-});
+
 
 // Modal Prompt Replacement
 const showPasswordPrompt = (acc_name) => {
@@ -106,6 +99,12 @@ const showPasswordPrompt = (acc_name) => {
         chatBox.style.display = 'flex';
         input.style.display = 'block';
         modal.remove();
+        window.addEventListener('keydown', e => {
+          if (e.key === '|') {
+            input.style.display = input.style.display === 'none' ? 'block' : 'none';
+            chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
+          }
+        });
       } else {
         alert('Incorrect password');
         localStorage.removeItem('player-name');
