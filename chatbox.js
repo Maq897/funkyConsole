@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getDatabase, ref, push, onValue, get } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
 // Firebase Config
 const firebaseConfig = {
@@ -31,6 +31,16 @@ input.placeholder = 'Press ENTER to chat!';
 input.autoFill = 'off'
 input.style.display = 'none';
 document.body.appendChild(input);
+
+const styles = ()=> {
+  const link = document.createElement('link')
+  Object.assign(link, {
+    rel: 'stylesheet',
+    href: 'https://cdn.jsdelivr.net/gh/Maq897/funkyConsole@main/chatbox.css?v=' + Date.now(),
+    title: 'Chatbox Styles'
+  })
+}
+styles()
 
 // Message Renderer
 const renderMessage = (sender, text) => {
